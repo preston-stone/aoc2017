@@ -102,10 +102,9 @@ class pathFinder{
      * Since the relative position of the first number, 1, in our matrix is 0,0, the formula is simply x2+y2.
      */
     private function taxicab(){
-        $this->stepsHome = $this->homeLocation + $this->row;
+        $this->stepsHome = abs($this->homeLocation + $this->row);
     }
 }
-
 $f = new pathFinder(277678);
 echo "Row: " . $f->row . "<br>";
 echo "Col: " . $f->col . "<br>";
