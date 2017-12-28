@@ -19,6 +19,7 @@
  arr15=(404 1757 358 2293 2626 87 613 95 1658 147 75 930 2394 2349 86 385)
 
 sums=()
+divisibles=()
 c=0
 
 while [ $c -le 15 ]; do
@@ -29,11 +30,32 @@ while [ $c -le 15 ]; do
     last=${sorted[${#sorted[@]}-1]}
     sum=$(($last - $first))
     sums+=($sum)
+    d=15
+
+    while [ $d -ge 0 ]; do
+        idx=${sorted[$d]}
+        n=0
+
+        while [ $n -le 15 ]; do
+            dividend=${sorted[$d]}
+            divisor=${sorted[$n]}
+            if !(($dividend == $divisor)) && !(($dividend % $divisor)); then
+                let "quotient = $dividend/$divisor"
+                divisibles+=($quotient)
+                break
+            else
+                let n=$n+1
+            fi
+        done
+        let d=$d-1
+    done
     let c=$c+1
 done
 
 IFS=+ read <<< "${sums[*]}"
-((answer=REPLY))
-echo "Part 1 answer: $answer"
+((answer1=REPLY))
+echo "Part 1 answer: $answer1"
 
-
+IFS=+ read <<< "${divisibles[*]}"
+((answer2=REPLY))
+echo "Part 2 answer: $answer2"
